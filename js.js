@@ -92,3 +92,22 @@ function toggleMoveTodo() {
     todoPanel.style.cursor = 'default';
   }
 }
+
+todoPanel.addEventListener('dragstart', (e) => {
+    if (!moveTodoActive) {
+      e.dataTransfer.setDragImage(document.createElement('div'), 0, 0);
+      offsetX = e.clientX - todoPanel.getBoundingClientRect().left;
+      offsetY = e.clientY - todoPanel.getBoundingClientRect().top;
+    }
+  });
+  
+  document.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  });
+  
+  document.addEventListener('drop', (e) => {
+    if (!moveTodoActive && offsetX !== undefined && offsetY !== undefined) {
+      todoPanel.style.left = `${e.clientX - offsetX}px`;
+      todoPanel.style.top = `${e.clientY - offsetY}px`;
+    }
+  });
