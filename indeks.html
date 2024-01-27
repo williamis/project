@@ -3,52 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="calculator.css">
-  <title>Javascript Projekti</title>
+  <link rel="stylesheet" href="css.css">
+  <title>Calculator with Todo List</title>
 </head>
 <body>
 
-    <div id="clock" class="clock"></div>
-    <div id="time" class="clock"></div>
-  
-    <div class="container">
-      <div class="calculator">
-        <textarea id="display" class="resizable" disabled placeholder="0"></textarea>
-        <div class="buttons">
-          <button onclick="appendToDisplay('1')">1</button>
-          <button onclick="appendToDisplay('2')">2</button>
-          <button onclick="appendToDisplay('3')">3</button>
-          <button class="operator" onclick="appendToDisplay('+')">+</button>
-          <button onclick="appendToDisplay('4')">4</button>
-          <button onclick="appendToDisplay('5')">5</button>
-          <button onclick="appendToDisplay('6')">6</button>
-          <button class="operator" onclick="appendToDisplay('-')">-</button>
-          <button onclick="appendToDisplay('7')">7</button>
-          <button onclick="appendToDisplay('8')">8</button>
-          <button onclick="appendToDisplay('9')">9</button>
-          <button class="operator" onclick="appendToDisplay('*')">*</button>
-          <button onclick="appendToDisplay('0')">0</button>
-          <button class="clear" onclick="clearDisplay()">C</button>
-          <button class="equal" onclick="calculate()">=</button>
-          <button class="operator" onclick="appendToDisplay('/')">/</button>
-          </div>
-        </div>
-      </div>
+  <div id="clock" class="clock"></div>
+  <div id="time" class="clock"></div>
 
-      <div class="side-panel resizable" id="todoPanel" draggable="true">
-        <div class="panel-header">
-          <h2>To-Do List</h2>
-          <button id="moveTodo" onclick="toggleMoveTodo()">Siirrä</button>
+  <div class="container">
+    <div class="calculator">
+      <textarea id="display" class="resizable" disabled placeholder="0"></textarea>
+      <div class="buttons">
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+        <button class="operator" onclick="appendToDisplay('+')">+</button>
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+        <button class="operator" onclick="appendToDisplay('-')">-</button>
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button class="operator" onclick="appendToDisplay('*')">*</button>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button class="equal" onclick="calculate()">=</button>
+        <button class="operator" onclick="appendToDisplay('/')">/</button>
         </div>
-        <input type="text" id="todoInput" placeholder="Lisää tehtävä">
-        <button onclick="addTodo()">Lisää</button>
-        <ul id="todoList"></ul>
       </div>
-  
-    <div class="memo">
-      <textarea id="memo" placeholder="Kirjoita muistiinpanoja"></textarea>
-      <button onclick="clearMemo()">Tyhjennä</button>
     </div>
-    <script src="calculator.js"></script>
+
+    <div class="side-panel resizable" id="todoPanel" draggable="true">
+      <div class="panel-header">
+        <h2>To-Do List</h2>
+        <button id="moveTodo" onclick="toggleMoveTodo()">Siirrä</button>
+      </div>
+      <input type="text" id="todoInput" placeholder="Lisää tehtävä">
+      <button onclick="addTodo()">Lisää</button>
+      <ul id="todoList"></ul>
+    </div>
+
+  <div class="memo">
+    <textarea id="memo" placeholder="Kirjoita muistiinpanoja"></textarea>
+    <button onclick="clearMemo()">Tyhjennä</button>
+  </div>
+
+  <script src="js.js"></script>
 </body>
 </html>
