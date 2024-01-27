@@ -34,3 +34,18 @@
           </div>
         </div>
       </div>
+
+      <div class="side-panel resizable" id="todoPanel" draggable="true">
+        <div class="panel-header">
+          <h2>To-Do List</h2>
+          <button id="moveTodo" onclick="toggleMoveTodo()">Siirrä</button>
+        </div>
+        <input type="text" id="todoInput" placeholder="Lisää tehtävä">
+        <button onclick="addTodo()">Lisää</button>
+        <ul id="todoList"></ul>
+      </div>
+  
+    <div class="memo">
+      <textarea id="memo" placeholder="Kirjoita muistiinpanoja"></textarea>
+      <button onclick="clearMemo()">Tyhjennä</button>
+    </div>
