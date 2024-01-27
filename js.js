@@ -74,3 +74,21 @@ function clearCalculator() {
   updateClock();
   
   setInterval(updateClock, 1000);
+
+  // jatka todo
+
+let moveTodoActive = false;
+
+function toggleMoveTodo() {
+  moveTodoActive = !moveTodoActive;
+  const moveTodoButton = document.getElementById('moveTodo');
+  const todoPanel = document.getElementById('todoPanel');
+
+  if (moveTodoActive) {
+    moveTodoButton.classList.add('active');
+    todoPanel.style.cursor = 'move';
+  } else {
+    moveTodoButton.classList.remove('active');
+    todoPanel.style.cursor = 'default';
+  }
+}
