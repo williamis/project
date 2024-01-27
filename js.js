@@ -50,3 +50,27 @@ function clearCalculator() {
   function clearMemo() {
     memo.value = '';
   }
+
+  // KELLO
+  function updateClock() {
+    const now = new Date();
+    const gmtPlus2Time = new Date(now.getTime() + (2 * 60 * 60 * 1000));
+  
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = gmtPlus2Time.toLocaleDateString('en-US', options);
+  
+    const clockElement = document.getElementById('clock');
+    clockElement.textContent = formattedDate;
+  
+    const seconds = gmtPlus2Time.getSeconds();
+    const minutes = gmtPlus2Time.getMinutes();
+    const hours = gmtPlus2Time.getHours();
+  
+    const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    const timeElement = document.getElementById('time');
+    timeElement.textContent = formattedTime;
+  }
+  
+  updateClock();
+  
+  setInterval(updateClock, 1000);
