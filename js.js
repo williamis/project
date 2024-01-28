@@ -77,38 +77,38 @@ function addTodo() {
     
    
   // jatka todo
+  const todoPanel = document.getElementById('todoPanel');
+  const moveTodoButton = document.getElementById('moveTodo');
+  const addTodoButton = document.getElementById('addTodo');
   
-  let moveTodoActive = false;
+  moveTodoButton.addEventListener('mousedown', startDrag);
+  addTodoButton.addEventListener('click', addTodo);
   
-  function toggleMoveTodo() {
-    moveTodoActive = !moveTodoActive;
-    const moveTodoButton = document.getElementById('moveTodo');
-    const todoPanel = document.getElementById('todoPanel');
-  
-    if (moveTodoActive) {
-      moveTodoButton.classList.add('active');
-      todoPanel.style.cursor = 'move';
-    } else {
-      moveTodoButton.classList.remove('active');
-      todoPanel.style.cursor = 'default';
+  function addTodo() {
+    const todoText = todoInput.value;
+    if (todoText.trim() !== '') {
+      const listItem = document.createElement('li');
+      listItem.textContent = todoText;
+      todoList.appendChild(listItem);
+      todoInput.value = '';
     }
   }
   
-  todoPanel.addEventListener('dragstart', (e) => {
-    if (!moveTodoActive) {
-      e.dataTransfer.setDragImage(document.createElement('div'), 0, 0);
-      offsetX = e.clientX - todoPanel.getBoundingClientRect().left;
-      offsetY = e.clientY - todoPanel.getBoundingClientRect().top;
-    }
-  });
+  function startDrag(event) {
+    let offsetX = event.clientX - todoPanel.getBoundingClientRect().left;
+    let offsetY = event.clientY - todoPanel.getBoundingClientRect().top;
   
-  document.addEventListener('dragover', (e) => {
-    e.preventDefault();
-  });
-  
-  document.addEventListener('drop', (e) => {
-    if (!moveTodoActive && offsetX !== undefined && offsetY !== undefined) {
-      todoPanel.style.left = `${e.clientX - offsetX}px`;
-      todoPanel.style.top = `${e.clientY - offsetY}px`;
+    function dragMove(event) {
+      todoPanel.style.left = event.clientX - offsetX + 'px';
+      todoPanel.style.top = event.clientY - offsetY + 'px';
     }
-  });
+  
+    function dragEnd() {
+      document.removeEventListener('mousemove', dragMove);
+      document.removeEventListener('mouseup', dragEnd);
+    }
+  
+    document.addEventListener('mousemove', dragMove);
+    document.addEventListener('mouseup', dragEnd);
+  }
+  
