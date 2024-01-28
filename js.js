@@ -43,6 +43,7 @@ function addTodo() {
   }
   
   
+  
   function clearCalculator() {
       display.value = '';
     }
@@ -126,3 +127,4 @@ function startDrag() {
   document.addEventListener('mousemove', dragMove);
   document.addEventListener('mouseup', dragEnd);
 }
+
