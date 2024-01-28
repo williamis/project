@@ -78,37 +78,51 @@ function addTodo() {
    
   // jatka todo
   const todoPanel = document.getElementById('todoPanel');
-  const moveTodoButton = document.getElementById('moveTodo');
-  const addTodoButton = document.getElementById('addTodo');
-  
-  moveTodoButton.addEventListener('mousedown', startDrag);
-  addTodoButton.addEventListener('click', addTodo);
-  
-  function addTodo() {
-    const todoText = todoInput.value;
-    if (todoText.trim() !== '') {
-      const listItem = document.createElement('li');
-      listItem.textContent = todoText;
-      todoList.appendChild(listItem);
-      todoInput.value = '';
-    }
+const moveTodoButton = document.getElementById('moveTodo');
+const addTodoButton = document.getElementById('addTodo');
+
+let isDragging = false;
+let offsetX, offsetY;
+
+moveTodoButton.addEventListener('click', toggleDrag);
+addTodoButton.addEventListener('click', addTodo);
+
+function addTodo() {
+  const todoText = todoInput.value;
+  if (todoText.trim() !== '') {
+    const listItem = document.createElement('li');
+    listItem.textContent = todoText;
+    todoList.appendChild(listItem);
+    todoInput.value = '';
   }
-  
-  function startDrag(event) {
-    let offsetX = event.clientX - todoPanel.getBoundingClientRect().left;
-    let offsetY = event.clientY - todoPanel.getBoundingClientRect().top;
-  
-    function dragMove(event) {
-      todoPanel.style.left = event.clientX - offsetX + 'px';
-      todoPanel.style.top = event.clientY - offsetY + 'px';
-    }
-  
-    function dragEnd() {
-      document.removeEventListener('mousemove', dragMove);
-      document.removeEventListener('mouseup', dragEnd);
-    }
-  
-    document.addEventListener('mousemove', dragMove);
-    document.addEventListener('mouseup', dragEnd);
+}
+
+function toggleDrag(event) {
+  if (!isDragging) {
+    // Aloita liikuttaminen
+    isDragging = true;
+    moveTodoButton.textContent = 'Lopeta siirtäminen';
+    offsetX = event.clientX - todoPanel.getBoundingClientRect().left;
+    offsetY = event.clientY - todoPanel.getBoundingClientRect().top;
+    startDrag();
+  } else {
+    // Lopeta liikuttaminen
+    isDragging = false;
+    moveTodoButton.textContent = 'Siirrä tästä';
   }
-  
+}
+
+function startDrag() {
+  function dragMove(event) {
+    todoPanel.style.left = event.clientX - offsetX + 'px';
+    todoPanel.style.top = event.clientY - offsetY + 'px';
+  }
+
+  function dragEnd() {
+    document.removeEventListener('mousemove', dragMove);
+    document.removeEventListener('mouseup', dragEnd);
+  }
+
+  document.addEventListener('mousemove', dragMove);
+  document.addEventListener('mouseup', dragEnd);
+}
